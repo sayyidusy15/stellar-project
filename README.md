@@ -1,101 +1,72 @@
-# Stellar Notes DApp
+# Stellar Todo DApp
 
-**Stellar Notes DApp** - Blockchain-Based Decentralized Note-Taking System
+**Stellar Todo DApp** - Blockchain-Based Decentralized Todo List
 
 ## Project Description
 
-Stellar Notes DApp is a decentralized smart contract solution built on the Stellar blockchain using Soroban SDK. It provides a secure, immutable platform for managing personal notes directly on the blockchain. The contract ensures that your data is stored transparently and is only manageable through predefined smart contract functions, eliminating reliance on centralized database providers.
+Stellar Todo DApp is a simple starter project showcasing a decentralized Todo List smart contract built on the Stellar blockchain using Soroban SDK. It provides an educational, easy-to-understand structure for developers to learn the basics of blockchain storage and simple state transitions.
 
-The system allows users to create, view, and delete notes, leveraging the efficiency and security of the Stellar network. Each note is uniquely identified and stored within the contract's instance storage, ensuring data persistence and reliability.
+The project is designed to be minimal, without complex authentication or a frontend, allowing developers to focus solely on the smart contract logic and understand how data manipulation works on the Stellar network.
 
 ## Project Vision
 
-Our vision is to revolutionize personal productivity in the digital age by:
-
-- **Decentralizing Data**: Moving note-taking from centralized servers to a global, distributed blockchain
-- **Ensuring Ownership**: Empowering users to have complete control and ownership over their digital thoughts and information
-- **Guaranteeing Immutability**: Providing a permanent, tamper-proof record of notes that cannot be altered or deleted by third parties
-- **Enhancing Privacy**: Leveraging blockchain security to protect personal information from unauthorized access
-- **Building Trustless Systems**: Creating a platform where data integrity is guaranteed by code, not by company promises
-
-We envision a future where digital information is truly personal and sovereign, empowering individuals with complete autonomy over their digital assets.
+Our vision is to provide a clean and robust template that simplifies learning Soroban smart contracts. By implementing a relatable use case—a Todo List—developers can easily grasp how to:
+- Define simple data structures in Soroban
+- Use persistent instance storage for lists and counters
+- Create functional logic to manipulate on-chain state safely
 
 ## Key Features
 
-### 1. **Simple Note Creation**
+### 1. **Create Tasks**
+- Simply create a task by providing a title and a description.
+- The smart contract automatically assigns an incremental `id` to uniquely identify each task.
 
-- Create notes with just one function call
-- Specify title and content for each note
-- Automated ID generation for unique identification
-- Persistent storage on the Stellar blockchain
+### 2. **View Tasks**
+- Fetch all current tasks stored on-chain.
+- Understand how vectors (`Vec`) work inside Soroban instance storage.
 
-### 2. **Efficient Data Retrieval**
+### 3. **Complete Tasks**
+- Mark any specific task as completed.
+- Learn how to loop through and update stored records inside the contract.
 
-- Fetch all stored notes in a single call
-- Structured data representation for easy frontend integration
-- Quick access to your entire note collection
-- Real-time synchronization with the blockchain state
+### 4. **Delete Tasks**
+- Remove tasks by their unique ID.
+- Understand how to cleanly update storage to free up space.
 
-### 3. **Secure Deletion**
+## Smart Contract Details
 
-- Remove specific notes using their unique IDs
-- Permanent removal from the contract storage
-- Clean and efficient storage management
-- Immediate update of the note list after deletion
+The contract defines a core `Task` structure containing:
+- `id` (u32): Auto-incremented unique identifier.
+- `title` (String): The title of the task.
+- `description` (String): Detailed information about the task.
+- `completed` (bool): Status of the task.
 
-### 4. **Transparency and Security**
+### Functions
 
-- View all note activities on the blockchain
-- Blockchain-based verification of all storage actions
-- Immutable records of note creation and deletion
-- Protected against unauthorized modifications
+- `create_task(title: String, description: String) -> u32`
+  Creates a new task and returns its new ID.
+- `get_tasks() -> Vec<Task>`
+  Returns a list of all stored tasks.
+- `complete_task(id: u32)`
+  Marks the specified task as completed.
+- `delete_task(id: u32)`
+  Deletes the specified task from storage.
 
-### 5. **Stellar Network Integration**
+## How It Works
 
-- Leverages the high speed and low cost of Stellar
-- Built using the modern Soroban Smart Contract SDK
-- Scalable architecture for growing note collections
-- Interoperable with other Stellar-based services
-
-## Contract Details
-
-- Contract Address: CBLU4IUASQ4WUMOXBFLZRSBBLILGOH33GS4LUPKFBCCCMJCDQNMF7G2M
-  ![alt text](screenshot.png)
+1. The contract uses **Soroban instance storage** to persist data.
+2. It tracks two pieces of state:
+   - `TaskCount`: A counter (u32) used to assign unique incremental IDs.
+   - `Tasks`: A vector (`Vec<Task>`) that holds the entire list of tasks.
+3. Every time a task is created, `TaskCount` increments and the task is pushed into `Tasks`.
+4. Updates (like completion or deletion) involve fetching `Tasks`, modifying the vector, and saving it back to storage.
 
 ## Future Scope
 
-### Short-Term Enhancements
-
-1. **Note Encryption**: Support for end-to-end encryption of note content for enhanced privacy
-2. **Category Management**: Add tags and categories to organize notes efficiently
-3. **Rich Text Support**: Extend support beyond plain text to include Markdown and formatted content
-4. **Search Functionality**: Implement advanced search filters for large note collections
-
-### Medium-Term Development
-
-5. **Collaborative Notes**: Implement multi-signature requirements for shared or collaborative note-taking
-   - Shared access for multiple addresses
-   - Permission-based editing and viewing
-   - Version history tracking
-6. **Notification System**: Off-chain bridge to alert users of new updates or shared notes
-7. **Asset Attachment**: Capability to attach digital assets or tokens to specific notes
-8. **Inter-Contract Integration**: Allow other smart contracts to interact with and store data in the notes contract
-
-### Long-Term Vision
-
-9. **Cross-Chain Synchronization**: Extend note storage to multiple blockchain networks
-10. **Decentralized UI Hosting**: Host the frontend on IPFS or similar decentralized platforms
-11. **AI-Powered Summarization**: Optional integration with AI to help users summarize their notes
-12. **Privacy Layers**: Implement zero-knowledge proofs for completely private note content
-13. **DAO Governance**: Community-driven protocol improvements and feature prioritization
-14. **Identity Management**: Integration with decentralized identity (DID) systems for user management
-
-### Enterprise Features
-
-15. **Corporate Documentation**: Adapt the system for secure corporate record-keeping
-16. **Immutable Logging**: Create time-locked logs for audit purposes
-17. **Automated Reporting**: Automatic note triggers for periodic reporting
-18. **Multi-Language Support**: Expand accessibility with internationalization
+While this project is meant to be a simple starter, it can be extended by developers looking for a challenge:
+1. **User Authentication:** Attach tasks to specific Stellar wallet addresses.
+2. **Event Emission:** Emit Soroban events when tasks are created, updated, or deleted.
+3. **Frontend Integration:** Build a minimal React/Next.js UI to interact with this contract using `@stellar/freighter-api`.
 
 ---
 
@@ -107,12 +78,4 @@ We envision a future where digital information is truly personal and sovereign, 
 
 ## Getting Started
 
-Deploy the smart contract to Stellar's Soroban network and interact with it using the three main functions:
-
-- `create_note()` - Create a new note with a title and content
-- `get_notes()` - Retrieve all stored notes from the contract
-- `delete_note()` - Remove a specific note by its ID
-
----
-
-**Stellar Notes DApp** - Securing Your Thoughts on the Blockchain
+Deploy the smart contract to Stellar's Soroban network and interact with it using the CLI to understand how basic state management functions work on-chain. This is a learning/demo project. Have fun building!
