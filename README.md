@@ -1,118 +1,146 @@
-# Stellar Notes DApp
+# Stellar Todo DApp (Soroban Smart Contract)
 
-**Stellar Notes DApp** - Blockchain-Based Decentralized Note-Taking System
+## Deskripsi
 
-## Project Description
+Stellar Todo DApp merupakan aplikasi sederhana berbasis smart contract yang dibangun menggunakan Soroban SDK di blockchain Stellar. Aplikasi ini memungkinkan pengguna untuk mengelola daftar tugas (todo list) secara terdesentralisasi, dengan data yang disimpan langsung di dalam smart contract.
 
-Stellar Notes DApp is a decentralized smart contract solution built on the Stellar blockchain using Soroban SDK. It provides a secure, immutable platform for managing personal notes directly on the blockchain. The contract ensures that your data is stored transparently and is only manageable through predefined smart contract functions, eliminating reliance on centralized database providers.
-
-The system allows users to create, view, and delete notes, leveraging the efficiency and security of the Stellar network. Each note is uniquely identified and stored within the contract's instance storage, ensuring data persistence and reliability.
-
-## Project Vision
-
-Our vision is to revolutionize personal productivity in the digital age by:
-
-- **Decentralizing Data**: Moving note-taking from centralized servers to a global, distributed blockchain
-- **Ensuring Ownership**: Empowering users to have complete control and ownership over their digital thoughts and information
-- **Guaranteeing Immutability**: Providing a permanent, tamper-proof record of notes that cannot be altered or deleted by third parties
-- **Enhancing Privacy**: Leveraging blockchain security to protect personal information from unauthorized access
-- **Building Trustless Systems**: Creating a platform where data integrity is guaranteed by code, not by company promises
-
-We envision a future where digital information is truly personal and sovereign, empowering individuals with complete autonomy over their digital assets.
-
-## Key Features
-
-### 1. **Simple Note Creation**
-
-- Create notes with just one function call
-- Specify title and content for each note
-- Automated ID generation for unique identification
-- Persistent storage on the Stellar blockchain
-
-### 2. **Efficient Data Retrieval**
-
-- Fetch all stored notes in a single call
-- Structured data representation for easy frontend integration
-- Quick access to your entire note collection
-- Real-time synchronization with the blockchain state
-
-### 3. **Secure Deletion**
-
-- Remove specific notes using their unique IDs
-- Permanent removal from the contract storage
-- Clean and efficient storage management
-- Immediate update of the note list after deletion
-
-### 4. **Transparency and Security**
-
-- View all note activities on the blockchain
-- Blockchain-based verification of all storage actions
-- Immutable records of note creation and deletion
-- Protected against unauthorized modifications
-
-### 5. **Stellar Network Integration**
-
-- Leverages the high speed and low cost of Stellar
-- Built using the modern Soroban Smart Contract SDK
-- Scalable architecture for growing note collections
-- Interoperable with other Stellar-based services
-
-## Contract Details
-
-- Contract Address: CBLU4IUASQ4WUMOXBFLZRSBBLILGOH33GS4LUPKFBCCCMJCDQNMF7G2M
-  ![alt text](screenshot.png)
-
-## Future Scope
-
-### Short-Term Enhancements
-
-1. **Note Encryption**: Support for end-to-end encryption of note content for enhanced privacy
-2. **Category Management**: Add tags and categories to organize notes efficiently
-3. **Rich Text Support**: Extend support beyond plain text to include Markdown and formatted content
-4. **Search Functionality**: Implement advanced search filters for large note collections
-
-### Medium-Term Development
-
-5. **Collaborative Notes**: Implement multi-signature requirements for shared or collaborative note-taking
-   - Shared access for multiple addresses
-   - Permission-based editing and viewing
-   - Version history tracking
-6. **Notification System**: Off-chain bridge to alert users of new updates or shared notes
-7. **Asset Attachment**: Capability to attach digital assets or tokens to specific notes
-8. **Inter-Contract Integration**: Allow other smart contracts to interact with and store data in the notes contract
-
-### Long-Term Vision
-
-9. **Cross-Chain Synchronization**: Extend note storage to multiple blockchain networks
-10. **Decentralized UI Hosting**: Host the frontend on IPFS or similar decentralized platforms
-11. **AI-Powered Summarization**: Optional integration with AI to help users summarize their notes
-12. **Privacy Layers**: Implement zero-knowledge proofs for completely private note content
-13. **DAO Governance**: Community-driven protocol improvements and feature prioritization
-14. **Identity Management**: Integration with decentralized identity (DID) systems for user management
-
-### Enterprise Features
-
-15. **Corporate Documentation**: Adapt the system for secure corporate record-keeping
-16. **Immutable Logging**: Create time-locked logs for audit purposes
-17. **Automated Reporting**: Automatic note triggers for periodic reporting
-18. **Multi-Language Support**: Expand accessibility with internationalization
+Proyek ini dibuat sebagai implementasi pembelajaran dasar pengembangan smart contract menggunakan Rust dan Soroban, dengan fokus pada operasi CRUD sederhana.
 
 ---
 
-## Technical Requirements
+## Tujuan
 
-- Soroban SDK
-- Rust programming language
-- Stellar blockchain network
-
-## Getting Started
-
-Deploy the smart contract to Stellar's Soroban network and interact with it using the three main functions:
-
-- `create_note()` - Create a new note with a title and content
-- `get_notes()` - Retrieve all stored notes from the contract
-- `delete_note()` - Remove a specific note by its ID
+* Memahami konsep dasar smart contract di Stellar (Soroban)
+* Mengimplementasikan penyimpanan data on-chain
+* Membangun aplikasi sederhana berbasis blockchain
+* Menggunakan Rust untuk pengembangan smart contract
 
 ---
 
-**Stellar Notes DApp** - Securing Your Thoughts on the Blockchain
+## Fitur
+
+Aplikasi ini memiliki beberapa fitur utama:
+
+* Menambahkan tugas baru (Create Task)
+* Melihat seluruh daftar tugas (Get Tasks)
+* Menandai tugas sebagai selesai (Complete Task)
+* Menghapus tugas (Delete Task)
+
+---
+
+## Struktur Data
+
+Smart contract menggunakan struktur data sebagai berikut:
+
+* **Task**
+
+  * `id`: ID unik tugas
+  * `title`: Judul tugas
+  * `description`: Deskripsi tugas
+  * `completed`: Status tugas (true/false)
+
+---
+
+## Fungsi Smart Contract
+
+Berikut adalah fungsi utama yang tersedia:
+
+* `create_task(title, description)`
+  Menambahkan tugas baru ke dalam sistem
+
+* `get_tasks()`
+  Mengambil seluruh daftar tugas yang tersimpan
+
+* `complete_task(id)`
+  Menandai tugas sebagai selesai
+
+* `delete_task(id)`
+  Menghapus tugas berdasarkan ID
+
+---
+
+## Contract ID (Testnet)
+
+```
+ISI_DENGAN_CONTRACT_ID_KAMU
+```
+
+---
+
+## Cara Penggunaan
+
+### 1. Build Contract
+
+```bash
+cargo build --target wasm32-unknown-unknown --release
+```
+
+### 2. Deploy ke Testnet
+
+```bash
+soroban contract deploy \
+  --wasm target/wasm32-unknown-unknown/release/nama_file.wasm \
+  --source default \
+  --network testnet
+```
+
+### 3. Menjalankan Fungsi
+
+Contoh menjalankan fungsi:
+
+**Menambahkan tugas:**
+
+```bash
+soroban contract invoke \
+  --id CONTRACT_ID \
+  --source default \
+  --network testnet \
+  -- create_task \
+  --title "Belajar Soroban" \
+  --description "Mengerjakan tugas workshop"
+```
+
+**Melihat daftar tugas:**
+
+```bash
+soroban contract invoke \
+  --id CONTRACT_ID \
+  --source default \
+  --network testnet \
+  -- get_tasks
+```
+
+---
+
+## Screenshot Hasil
+
+Tambahkan screenshot hasil interaksi smart contract di bawah ini:
+
+![Screenshot Testnet](link_atau_file_gambar_kamu)
+
+---
+
+## Teknologi yang Digunakan
+
+* Rust
+* Soroban SDK
+* Stellar Blockchain (Testnet)
+* Soroban CLI
+
+---
+
+## Pengembangan Selanjutnya
+
+Beberapa pengembangan yang dapat dilakukan ke depan:
+
+* Menambahkan fitur update task
+* Menambahkan sistem autentikasi pengguna
+* Integrasi dengan frontend (web interface)
+* Menambahkan filter (completed / pending)
+* Visualisasi data tugas
+
+---
+
+## Catatan
+
+Proyek ini merupakan aplikasi sederhana untuk keperluan pembelajaran dan bukan untuk penggunaan produksi.
