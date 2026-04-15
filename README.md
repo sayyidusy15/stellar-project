@@ -57,6 +57,18 @@ Functions:
 4. `complete_task` loops through tasks, updates matching task, and saves.
 5. `delete_task` builds a new list without the target ID, then saves it.
 
+## Prerequisites
+
+Install Rust using `rustup` (https://rustup.rs). This repository includes `rust-toolchain.toml`, so Rust will automatically use the stable toolchain with `rustfmt` and the `wasm32-unknown-unknown` target.
+
+If your machine still shows a rustup default error, run:
+
+```bash
+rustup default stable
+rustup target add wasm32-unknown-unknown
+rustup component add rustfmt clippy
+```
+
 ## Project Structure
 
 ```text
