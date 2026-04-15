@@ -86,3 +86,41 @@ impl TodoContract {
         env.storage().persistent().set(&TASKS_KEY, tasks);
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use soroban_sdk::{Env, String};
+
+    #[test]
+    fn test_todo_management() {
+        let env = Env::default();
+        // Register the contract and create a client for testing
+        let contract_id = env.register(TodoContract, ());
+        let client = TodoContractClient::new(&env, &contract_id);
+
+        let title = String::from_str(&env, "Tugas Pertama");
+        let desc = String::from_str(&env, "Deskripsi Tugas Pertama");
+
+        // 1. Mengetes fungsi create_task
+        client.create_task(&title, &desc);
+        let tasks = client.get_tasks();
+        assert_eq!(tasks.len(), 1);
+        
+        let task = tasks.get(0).unwrap();
+        assert_eq!(task.id, 0);
+        assert_eq!(task.title, title);
+        assert_eq!(task.description, desc);
+        assert_eq!(task.completed, false);
+
+        // 2. Mengetes fungsi complete_task
+        client.complete_task(&0);
+        let tasks_after_complete = client.get_tasks();
+        assert_eq!(tasks_after_complete.get(0).unwrap().completed, true);
+
+        // 3. Mengetes fungsi delete_task
+        client.delete_task(&0);
+        let tasks_after_delete = client.get_tasks();
+        assert_eq!(tasks_after_delete.len(), 0);
+    }
+}

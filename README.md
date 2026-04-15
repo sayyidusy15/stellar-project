@@ -1,146 +1,72 @@
-# Stellar Todo DApp (Soroban Smart Contract)
+# 🚀 Stellar Todo DApp (Soroban Submission)
 
-## Deskripsi
-
-Stellar Todo DApp merupakan aplikasi sederhana berbasis smart contract yang dibangun menggunakan Soroban SDK di blockchain Stellar. Aplikasi ini memungkinkan pengguna untuk mengelola daftar tugas (todo list) secara terdesentralisasi, dengan data yang disimpan langsung di dalam smart contract.
-
-Proyek ini dibuat sebagai implementasi pembelajaran dasar pengembangan smart contract menggunakan Rust dan Soroban, dengan fokus pada operasi CRUD sederhana.
+Halo aku sayyidusy syauqi al ghiffari! Ini  project **Decentralized Application (dApp)** berbasis **Stellar** yang saya bangun sebagai tugas submission setelah mengikuti Stellar Workshop. Aplikasi ini bukan sekadar *to-do list* biasa, melainkan implementasi dari teknologi blockchain khususnya di ekosistem Smart Contract milik Stellar, yaitu **Soroban**.
 
 ---
 
-## Tujuan
+## 📸 Preview Aplikasi
+![App Preview](frontend/public/app.jpeg)
 
-* Memahami konsep dasar smart contract di Stellar (Soroban)
-* Mengimplementasikan penyimpanan data on-chain
-* Membangun aplikasi sederhana berbasis blockchain
-* Menggunakan Rust untuk pengembangan smart contract
+*Tampilan antarmuka (UI) menggunakan Next.js*
 
 ---
 
-## Fitur
+## 🛠 Apa yang Spesial dari Project Ini?
 
-Aplikasi ini memiliki beberapa fitur utama:
+Dalam project ini, saya mengintegrasikan beberapa konsep utama dari ekosistem Web3 dan Blockchain:
 
-* Menambahkan tugas baru (Create Task)
-* Melihat seluruh daftar tugas (Get Tasks)
-* Menandai tugas sebagai selesai (Complete Task)
-* Menghapus tugas (Delete Task)
+### 1. Soroban Smart Contract
+Logika utama aplikasi ini (seperti menambah atau menghapus tugas) tidak berjalan di server database konvensional, melainkan di dalam **Smart Contract** yang dibangun di atas **Soroban** (platform smart contract Stellar). Data tugas disimpan dalam *persistent storage* di jaringan Stellar.
 
----
+### 2. Mengapa Menggunakan Rust?
+Smart contract ini ditulis menggunakan bahasa **Rust**. Kenapa Rust? 
+- **Keamanan:** Mencegah banyak bug memori yang umum terjadi.
+- **Efisiensi:** Dikompilasi menjadi WebAssembly (WASM) yang sangat ringan dan cepat saat dieksekusi di blockchain.
 
-## Struktur Data
-
-Smart contract menggunakan struktur data sebagai berikut:
-
-* **Task**
-
-  * `id`: ID unik tugas
-  * `title`: Judul tugas
-  * `description`: Deskripsi tugas
-  * `completed`: Status tugas (true/false)
+### 3. Konsep Web3 & Blockchain
+- **Desentralisasi:** Data tugas tidak dikontrol oleh satu entitas pusat, melainkan terdistribusi di ledger Stellar.
+- **Wallet Connection:** Aplikasi ini dirancang untuk nantinya terhubung dengan **Freighter Wallet** sebagai identitas pengguna (True Wallet/Self-custody).
+- **On-chain Action:** Saat kita menambah tugas, kita sebenarnya mengirim transaksi yang akan divalidasi oleh network.
 
 ---
 
-## Fungsi Smart Contract
+## 🏗 Struktur Project
 
-Berikut adalah fungsi utama yang tersedia:
-
-* `create_task(title, description)`
-  Menambahkan tugas baru ke dalam sistem
-
-* `get_tasks()`
-  Mengambil seluruh daftar tugas yang tersimpan
-
-* `complete_task(id)`
-  Menandai tugas sebagai selesai
-
-* `delete_task(id)`
-  Menghapus tugas berdasarkan ID
+Project ini terbagi menjadi dua bagian utama:
+1.  **/contracts**: Berisi kode smart contract (Rust) yang mengelola logika CRUD (Create, Read, Update, Delete) tugas di blockchain.
+2.  **/frontend**: Antarmuka pengguna yang dibangun dengan **Next.js** dan **Tailwind CSS**. UI dirancang minimalis agar fokus pada fungsi dan performa teknis.
 
 ---
 
-## Contract ID (Testnet)
+## 🚀 Cara Menjalankan Project
 
-```
-ISI_DENGAN_CONTRACT_ID_KAMU
-```
+### Prerequisites
+- Rust & Cargo
+- Target `wasm32-unknown-unknown`
+- Node.js & npm
+- Stellar CLI (untuk deploy contract)
 
----
-
-## Cara Penggunaan
-
-### 1. Build Contract
-
+### 1. Menjalankan Smart Contract (Backend)
+Masuk ke folder kontrak dan jalankan pengujian untuk memastikan logika benar:
 ```bash
-cargo build --target wasm32-unknown-unknown --release
+cd contracts/todo
+cargo test
 ```
 
-### 2. Deploy ke Testnet
-
+### 2. Menjalankan Frontend
+Masuk ke folder frontend dan jalankan server lokal:
 ```bash
-soroban contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/nama_file.wasm \
-  --source default \
-  --network testnet
+cd frontend
+npm install
+npm run dev
 ```
-
-### 3. Menjalankan Fungsi
-
-Contoh menjalankan fungsi:
-
-**Menambahkan tugas:**
-
-```bash
-soroban contract invoke \
-  --id CONTRACT_ID \
-  --source default \
-  --network testnet \
-  -- create_task \
-  --title "Belajar Soroban" \
-  --description "Mengerjakan tugas workshop"
-```
-
-**Melihat daftar tugas:**
-
-```bash
-soroban contract invoke \
-  --id CONTRACT_ID \
-  --source default \
-  --network testnet \
-  -- get_tasks
-```
+Akses di `http://localhost:3000`.
 
 ---
 
-## Screenshot Hasil
-
-Tambahkan screenshot hasil interaksi smart contract di bawah ini:
-
-![Screenshot Testnet](link_atau_file_gambar_kamu)
+## 📝 Catatan Tambahan
+Project ini dibuat dengan fokus pada kejelasan kode dan pemahaman alur data dari Smart Contract ke Frontend. Tampilan UI sengaja dibuat tajam (*sharp edges*) dan minimalis untuk memberikan kesan profesional dan berfokus pada utilitas sistem.
 
 ---
-
-## Teknologi yang Digunakan
-
-* Rust
-* Soroban SDK
-* Stellar Blockchain (Testnet)
-* Soroban CLI
-
----
-
-## Pengembangan Selanjutnya
-
-Beberapa pengembangan yang dapat dilakukan ke depan:
-
-* Menambahkan fitur update task
-* Menambahkan sistem autentikasi pengguna
-* Integrasi dengan frontend (web interface)
-* Menambahkan filter (completed / pending)
-* Visualisasi data tugas
-
----
-
-## Catatan
-
-Proyek ini merupakan aplikasi sederhana untuk keperluan pembelajaran dan bukan untuk penggunaan produksi.
+**Submission Oleh:** [Nama Kamu]
+*Dibuat untuk tugas workshop pengembangan dApp Stellar/Soroban 2026.*
