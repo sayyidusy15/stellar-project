@@ -1,87 +1,72 @@
-# Stellar Todo DApp (Soroban Starter)
+# 🚀 Stellar Todo DApp (Soroban Submission)
 
-A beginner-friendly starter project for building a **Todo List smart contract** on Stellar using the Soroban SDK.
+Halo aku sayyidusy syauqi al ghiffari! Ini  project **Decentralized Application (dApp)** berbasis **Stellar** yang saya bangun sebagai tugas submission setelah mengikuti Stellar Workshop. Aplikasi ini bukan sekadar *to-do list* biasa, melainkan implementasi dari teknologi blockchain khususnya di ekosistem Smart Contract milik Stellar, yaitu **Soroban**.
 
-## Description
+---
 
-This repository is a simple workshop-style template that shows how to store and manage todo tasks directly on-chain.
+## 📸 Preview Aplikasi
+![App Preview](frontend/public/app.jpeg)
 
-Each task includes:
-- `id` (`u32`)
-- `title` (`String`)
-- `description` (`String`)
-- `completed` (`bool`)
+*Tampilan antarmuka (UI) menggunakan Next.js*
 
-The goal is educational clarity, not production-ready complexity.
+---
 
-## Vision
+## 🛠 Apa yang Spesial dari Project Ini?
 
-Help developers quickly understand how Soroban contract storage works by using a familiar use case: a basic todo list.
+Dalam project ini, saya mengintegrasikan beberapa konsep utama dari ekosistem Web3 dan Blockchain:
 
-## Features
+### 1. Soroban Smart Contract
+Logika utama aplikasi ini (seperti menambah atau menghapus tugas) tidak berjalan di server database konvensional, melainkan di dalam **Smart Contract** yang dibangun di atas **Soroban** (platform smart contract Stellar). Data tugas disimpan dalam *persistent storage* di jaringan Stellar.
 
-- Create tasks with auto-incrementing IDs
-- Read all tasks from contract storage
-- Mark tasks as completed
-- Delete tasks by ID
-- Clean Rust code with simple contract logic
+### 2. Mengapa Menggunakan Rust?
+Smart contract ini ditulis menggunakan bahasa **Rust**. Kenapa Rust? 
+- **Keamanan:** Mencegah banyak bug memori yang umum terjadi.
+- **Efisiensi:** Dikompilasi menjadi WebAssembly (WASM) yang sangat ringan dan cepat saat dieksekusi di blockchain.
 
-## Future Improvements
+### 3. Konsep Web3 & Blockchain
+- **Desentralisasi:** Data tugas tidak dikontrol oleh satu entitas pusat, melainkan terdistribusi di ledger Stellar.
+- **Wallet Connection:** Aplikasi ini dirancang untuk nantinya terhubung dengan **Freighter Wallet** sebagai identitas pengguna (True Wallet/Self-custody).
+- **On-chain Action:** Saat kita menambah tugas, kita sebenarnya mengirim transaksi yang akan divalidasi oleh network.
 
-- Add per-user task ownership
-- Add task update/edit function
-- Add due dates and priority levels
-- Add pagination for large task lists
-- Add authentication and access control
+---
 
-## Smart Contract Details
+## 🏗 Struktur Project
 
-Contract: `TodoContract`
+Project ini terbagi menjadi dua bagian utama:
+1.  **/contracts**: Berisi kode smart contract (Rust) yang mengelola logika CRUD (Create, Read, Update, Delete) tugas di blockchain.
+2.  **/frontend**: Antarmuka pengguna yang dibangun dengan **Next.js** dan **Tailwind CSS**. UI dirancang minimalis agar fokus pada fungsi dan performa teknis.
 
-Functions:
-- `create_task(env, title, description)`
-  - Adds a new task with `completed = false`
-  - Uses the current task list length as the next ID
-- `get_tasks(env)`
-  - Returns all stored tasks
-- `complete_task(env, id)`
-  - Finds task by ID and marks it as completed
-- `delete_task(env, id)`
-  - Removes task by ID from the stored list
+---
 
-## How It Works (Simple Flow)
+## 🚀 Cara Menjalankan Project
 
-1. The contract keeps all tasks in Soroban **persistent storage** under one key.
-2. `create_task` reads existing tasks, appends a new task, and stores the list again.
-3. `get_tasks` returns the full list.
-4. `complete_task` loops through tasks, updates matching task, and saves.
-5. `delete_task` builds a new list without the target ID, then saves it.
+### Prerequisites
+- Rust & Cargo
+- Target `wasm32-unknown-unknown`
+- Node.js & npm
+- Stellar CLI (untuk deploy contract)
 
-## Prerequisites
-
-Install Rust using `rustup` (https://rustup.rs). This repository includes `rust-toolchain.toml`, so Rust will automatically use the stable toolchain with `rustfmt` and the `wasm32-unknown-unknown` target.
-
-If your machine still shows a rustup default error, run:
-
+### 1. Menjalankan Smart Contract (Backend)
+Masuk ke folder kontrak dan jalankan pengujian untuk memastikan logika benar:
 ```bash
-rustup default stable
-rustup target add wasm32-unknown-unknown
-rustup component add rustfmt clippy
+cd contracts/todo
+cargo test
 ```
 
-## Project Structure
-
-```text
-.
-├── Cargo.toml
-├── contracts
-│   └── todo
-│       ├── Cargo.toml
-│       └── src
-│           └── lib.rs
-└── README.md
+### 2. Menjalankan Frontend
+Masuk ke folder frontend dan jalankan server lokal:
+```bash
+cd frontend
+npm install
+npm run dev
 ```
+Akses di `http://localhost:3000`.
 
-## Notes
+---
 
-This is a **learning/demo project** and intentionally keeps the implementation minimal.
+## 📝 Catatan Tambahan
+Project ini dibuat dengan fokus pada kejelasan kode dan pemahaman alur data dari Smart Contract ke Frontend. Tampilan UI sengaja dibuat tajam (*sharp edges*) dan minimalis untuk memberikan kesan profesional dan berfokus pada utilitas sistem.
+
+---
+**Submission Oleh:** [Nama Kamu]
+*Dibuat untuk tugas workshop pengembangan dApp Stellar/Soroban 2026.*
