@@ -36,7 +36,11 @@ To fulfill the submission requirements, here are the deployment details on the *
 
 - **Contract ID:** `CCVKYKAG6UDTO536MYIRF2GJGV2L4UHUXHCMKG36BHLXOPUWCNIX72FP`
 - **Network:** Stellar Testnet
-- **Explorer:** [Stellar Expert (Testnet)](https://stellar.expert/explorer/testnet)
+- **Explorer:** [Stellar Expert (Testnet)](https://stellar.expert/explorer/testnet/contract/CCVKYKAG6UDTO536MYIRF2GJGV2L4UHUXHCMKG36BHLXOPUWCNIX72FP)
+
+### 📊 Deployment Proof (Stellar Expert)
+![Stellar Expert Screenshot](frontend/public/stellar-expert.jpeg)
+
 
 > **Note:** Replace the Contract ID above with the actual ID obtained after running the `stellar contract deploy` command.
 
