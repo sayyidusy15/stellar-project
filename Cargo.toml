@@ -5,7 +5,7 @@ members = [
 ]
 
 [workspace.dependencies]
-soroban-sdk = { version = "25", features = ["testutils"] }
+soroban-sdk = "25"
 
 [profile.release]
 opt-level = "z"
